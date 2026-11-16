@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101b36">
+  <title>Winterquest</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">❄</span><div><strong>WINTERQUEST</strong><small>Ein winterliches Abenteuer</small></div></div>
+      <div class="top-actions">
+        <span id="save-status" class="save-status">Lokaler Spielstand</span>
+        <button id="sound-toggle" class="small-button" type="button" aria-label="Ton umschalten">♫ Ton an</button>
+      </div>
+    </header>
+
+    <section id="start-screen" class="screen start-screen">
+      <div class="hero-art" aria-hidden="true">
+        <div class="moon"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div>
+        <div class="pine pine-one">♠</div><div class="pine pine-two">♠</div>
+        <div class="pixel-hero"><span class="fox">●</span><span class="hero-dot"></span></div>
+      </div>
+      <p class="eyebrow">24 LEVEL · 5 REGIONEN · 1 GROSSES GEHEIMNIS</p>
+      <h1>Das Abenteuer<br><em>beginnt im Schnee.</em></h1>
+      <p class="intro">Begleite Leon und seinen treuen Gefährten Peter durch eine geheimnisvolle Winterwelt.</p>
+      <div class="start-actions">
+        <button id="new-game" class="primary-button">Neues Spiel</button>
+        <button id="continue-game" class="secondary-button">Spiel fortsetzen</button>
+        <button id="open-map-start" class="text-button">Levelkarte ansehen</button>
+      </div>
+      <p class="tiny-note">Prototyp – dein Fortschritt wird zunächst auf diesem Gerät gespeichert.</p>
+    </section>
+
+    <section id="map-screen" class="screen hidden">
+      <div class="section-heading"><div><p class="eyebrow">DEIN ABENTEUER</p><h2>Levelkarte</h2></div><button class="secondary-button back-home">Hauptmenü</button></div>
+      <div id="region-list" class="region-list"></div>
+      <div class="map-legend"><span><i class="legend green"></i>Abgeschlossen</span><span><i class="legend red"></i>Spielbar</span><span><i class="legend gray"></i>Gesperrt</span></div>
+    </section>
+
+    <section id="game-screen" class="screen hidden">
+      <div class="game-heading">
+        <div><p id="region-name" class="eyebrow"></p><h2 id="level-name">Flockendorf</h2></div>
+        <div class="stats"><span>❤ <b id="hearts">5/5</b></span><span>✦ <b id="xp">0 XP</b></span><span>◈ <b id="coins">0</b></span></div>
+      </div>
+      <div class="game-layout">
+        <div class="world-frame">
+          <div id="world" class="world">
+            <div class="sky-glow"></div><div class="pixel-moon"></div>
+            <div class="world-title" id="world-title">Flockendorf</div>
+            <div class="snow-ground"></div>
+            <div class="hut hut-a"><span>⌂</span></div><div class="hut hut-b"><span>⌂</span></div>
+            <div class="tree tree-a">♠</div><div class="tree tree-b">♠</div><div class="tree tree-c">♠</div>
+            <div class="crystal">◆</div>
+            <div class="character leon" title="Leon"><span>●</span></div>
+            <div class="character peter" title="Peter"><span>◆</span></div>
+            <div class="speech" id="speech">Peter: Los, Leon! Im Dorf stimmt etwas nicht.</div>
+          </div>
+          <div class="world-controls"><span>WASD / Pfeiltasten: bewegen (Prototyp)</span><span id="location-label">Dorfplatz</span></div>
+        </div>
+        <aside class="side-panel">
+          <div class="panel-card"><p class="eyebrow">AKTUELLE AUFGABE</p><h3 id="objective-title">Erkunde Flockendorf</h3><p id="objective-text">Sprich mit den Bewohnern und untersuche die erloschenen Lichtkristalle.</p><button id="complete-task" class="primary-button full">Aufgabe abschließen</button></div>
+          <div class="panel-card peter-card"><div class="peter-icon">🐾</div><div><p class="eyebrow">DEIN GEFÄHRTE</p><h3>Peter</h3><p id="peter-line">„Ich habe da eine Spur entdeckt!“</p></div></div>
+          <div class="panel-buttons"><button id="inventory-button" class="secondary-button">🎒 Inventar</button><button id="journal-button" class="secondary-button">📖 Tagebuch</button><button id="map-button" class="secondary-button">🗺 Levelkarte</button></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="inventory-screen" class="screen hidden">
+      <div class="section-heading"><div><p class="eyebrow">DEINE AUSRÜSTUNG</p><h2>Inventar</h2></div><button class="secondary-button back-game">Zurück</button></div>
+      <div class="tabs"><button class="tab active">Kalendergegenstände</button><button class="tab">Heilung</button><button class="tab">Sammelobjekte</button><button class="tab">Schlüssel & Rätsel</button><button class="tab">Kosmetik</button></div>
+      <div class="inventory-grid" id="inventory-grid"></div>
+      <p class="hint">Die 24 besonderen Gegenstände bleiben bis Level 24 geschützt. Ihre echten Geschenkidentitäten werden im Spiel nicht verraten.</p>
+    </section>
+
+    <section id="journal-screen" class="screen hidden">
+      <div class="section-heading"><div><p class="eyebrow">DEINE NOTIZEN</p><h2>Tagebuch</h2></div><button class="secondary-button back-game">Zurück</button></div>
+      <div class="panel-card"><h3>Die Geschichte</h3><p id="journal-text">Leon und Peter sind gerade in Flockendorf angekommen. Die Lichtkristalle sind erloschen.</p></div>
+    </section>
+
+    <section id="settings-screen" class="screen hidden">
+      <div class="section-heading"><div><p class="eyebrow">ANPASSEN</p><h2>Einstellungen</h2></div><button class="secondary-button back-home">Hauptmenü</button></div>
+      <div class="panel-card settings-card">
+        <label>Musiklautstärke <input id="music-volume" type="range" min="0" max="100" value="35"></label>
+        <label>Effektlautstärke <input id="sfx-volume" type="range" min="0" max="100" value="70"></label>
+        <p class="hint">Die Lautstärkeregler sind vorbereitet. Audiodateien können später in <code>assets/audio/</code> ergänzt werden.</p>
+        <button id="reset-progress" class="danger-button">Lokalen Spielstand zurücksetzen</button>
+      </div>
+    </section>
+
+    <footer class="footer"><span>WINTERQUEST</span><span>Ein Abenteuer von Leon & Peter</span><button id="settings-button" class="footer-link">Einstellungen</button></footer>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-card"><button id="close-modal" class="modal-close">×</button><p class="eyebrow">WINTERQUEST</p><h2 id="modal-title"></h2><p id="modal-text"></p><button id="modal-ok" class="primary-button">Weiter</button></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <script src="./game.js"></script>
+</body>
+</html>
